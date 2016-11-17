@@ -88,9 +88,13 @@ def login(request):
                                      password=request.POST.get('password'))
 
             if user is not None:
-                auth.login(request, user)
-                messages.error(request, "You have successfully logged in")
-                return redirect(reverse('profile'))
+                #  Stripe subscription > Renewing a Subscription > Challenge A
+                if user.subscription_end < arrow.now():
+                    form.add_error(None, "Your subscription has expired")
+                else:
+                    auth.login(request, user)
+                    messages.error(request, "You have successfully logged in")
+                    return redirect(reverse('profile'))
             else:
                 form.add_error(None, "Your email or password was not recognised")
 
