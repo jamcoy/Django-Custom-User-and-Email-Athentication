@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hello',
     'accounts',
+    'paypal_store',
     'django_forms_bootstrap',
+    'products',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +139,11 @@ STATIC_URL = '/static/'
 
 STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE', 'publishable key')
 STRIPE_SECRET = os.getenv('STRIPE_SECRET', 'secret key')
+
+
+# Paypal
+
+SITE_URL = 'http://127.0.0.1:8000'
+PAYPAL_NOTIFY_URL = 'http://127.0.0.1/a-very-hard-to-guess-url/'
+PAYPAL_RECEIVER_EMAIL = 'seller@*****'
+
