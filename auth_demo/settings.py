@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'hello',
     'accounts',
     'paypal_store',
+    'paypal.standard.ipn',
     'django_forms_bootstrap',
     'products',
 ]
@@ -145,5 +146,5 @@ STRIPE_SECRET = os.getenv('STRIPE_SECRET', 'secret key')
 
 SITE_URL = 'http://127.0.0.1:8000'
 PAYPAL_NOTIFY_URL = 'http://127.0.0.1/a-very-hard-to-guess-url/'
-PAYPAL_RECEIVER_EMAIL = 'seller@*****'
+PAYPAL_RECEIVER_EMAIL = 'seller@'
 
