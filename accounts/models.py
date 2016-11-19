@@ -28,6 +28,8 @@ class AccountUserManager(UserManager):
 
 class User(AbstractUser):
     objects = AccountUserManager()
+    stripe_id = models.CharField(max_length=40, default='')
+    subscription_end = models.DateTimeField(default=timezone.now)
 
     def is_subscribed(self, magazine):
         try:
