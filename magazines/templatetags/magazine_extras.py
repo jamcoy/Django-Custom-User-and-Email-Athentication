@@ -11,7 +11,7 @@ def paypal_form_for(magazine, user):
         html = "Subscribed!"
     else:
         paypal_dict = {
-            "business": settings.PAYPAL_RECEIVER_EMAIL,
+            "business": settings.PAYPAL_RECEIVER_EMAIL,  # PAYPAL_RECEIVER_EMAIL deprecated as of 0.3 (see below)
             "currency_code": "USD",
             "cmd": "_xclick-subscriptions",
             "a3": magazine.price,
@@ -36,3 +36,5 @@ def paypal_form_for(magazine, user):
 
 
 register.simple_tag(paypal_form_for)
+
+# https://django-paypal.readthedocs.io/en/stable/release_notes.html

@@ -3,7 +3,6 @@ from .models import Purchase
 
 
 def subscription_created(sender, **kwargs):
-
     ipn_obj = sender
     magazine_id = ipn_obj.custom.split('-')[0]
     user_id = ipn_obj.custom.split('-')[1]
@@ -13,10 +12,9 @@ def subscription_created(sender, **kwargs):
 
 
 def subscription_was_cancelled(sender, **kwargs):
-
     ipn_obj = sender
     magazine_id = ipn_obj.custom.split('-')[0]
     user_id = ipn_obj.custom.split('-')[1]
-    purchase = Purchase.object.get(user_id=user_id, magazine_id=magazine_id)
+    purchase = Purchase.objects.get(user_id=user_id, magazine_id=magazine_id)  # object ???
     purchase.subscription_end = arrow.now().datetime
     purchase.save()

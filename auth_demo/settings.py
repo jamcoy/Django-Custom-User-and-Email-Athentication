@@ -35,10 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'paypal.standard.ipn',
     'hello',
     'accounts',
     'paypal_store',
-    'paypal.standard.ipn',
     'django_forms_bootstrap',
     'products',
     'magazines',
@@ -145,7 +145,8 @@ STRIPE_SECRET = os.getenv('STRIPE_SECRET', 'secret key')
 
 # Paypal
 
+PAYPAL_TEST = True
 SITE_URL = 'http://127.0.0.1:8000'
-PAYPAL_NOTIFY_URL = 'http://127.0.0.1/a-very-hard-to-guess-url/'
-PAYPAL_RECEIVER_EMAIL = 'seller@'
+PAYPAL_NOTIFY_URL = 'https://***********/a-very-hard-to-guess-url/'
+PAYPAL_RECEIVER_EMAIL = 'seller@********'  # deprecated (but still works until 0.4?)
 
