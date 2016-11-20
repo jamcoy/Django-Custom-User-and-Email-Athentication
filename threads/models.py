@@ -19,7 +19,7 @@ class Thread(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
 
-class Posts(models.Model):
+class Post(models.Model):
     thread = models.ForeignKey(Thread, related_name='posts')
     comment = HTMLField(blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='posts')
