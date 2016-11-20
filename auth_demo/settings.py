@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'reusable_blog',
     'disqus',
     'django.contrib.sites',
+    'debug_toolbar',
+    'tinymce',
+    'emoticons',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'auth_demo.urls'
@@ -138,7 +142,7 @@ STATICFILES_DIRS = (
 )
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = ''
 
 # Stripe
 
@@ -153,3 +157,7 @@ SITE_URL = 'http://127.0.0.1:8000'
 PAYPAL_NOTIFY_URL = 'https://***********/a-very-hard-to-guess-url/'
 PAYPAL_RECEIVER_EMAIL = 'seller@********'  # deprecated (but still works until 0.4?)
 
+
+# tinymce settings
+
+TINYMCE_JS_ROOT = os.path.join(BASE_DIR, "static", 'js', 'tinymce', 'tinymce.min.js')
