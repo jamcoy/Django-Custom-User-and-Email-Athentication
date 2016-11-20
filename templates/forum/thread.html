@@ -11,16 +11,14 @@
                 <table class="table">
                     <tbody>
                     <tr>
-                        <th>
-                            CREATED
-                        </th>
+                        <th>CREATED</th>
                         <th>OWNER</th>
                         <th>LAST POST</th>
                     </tr>
                     <tr>
                         <td>
                             <time datetime="{{ thread.created_at }}">
-                                {{ thread.created_at|started_time }}
+                                {{ thread.created_at | started_time }}
                             </time>
                         </td>
                         <td>{{ thread.user.username }}</td>
