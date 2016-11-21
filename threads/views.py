@@ -7,6 +7,7 @@ from .forms import ThreadForm, PostForm
 from threads.models import Subject, Post, Thread
 from django.forms import formset_factory
 from polls.forms import PollSubjectForm, PollForm
+from polls.models import PollSubject
 
 
 def forum(request):
@@ -28,24 +29,39 @@ def new_thread(request, subject_id):
         poll_form = PollForm(request.POST)
         poll_subject_formset = poll_subject_formset(request.POST)
         if thread_form.is_valid() and post_form.is_valid() and poll_form.is_valid() and poll_subject_formset.is_valid():
-            thread = thread_form.save(False)
-            thread.subject = subject
-            thread.user = request.user
-            thread.save()
+            if request.POST.get('is_a_poll', None):
+                thread = thread_form.save(False)
+                thread.subject = subject
+                thread.user = request.user
+                thread.save()
 
-            post = post_form.save(False)
-            post.user = request.user
-            post.thread = thread
-            post.save()
+                post = post_form.save(False)
+                post.user = request.user
+                post.thread = thread
+                post.save()
 
-            poll = poll_form.save(False)
-            poll.thread = thread
-            poll.save()
+                poll = poll_form.save(False)
+                poll.thread = thread
+                poll.save()
 
-            for subject_form in poll_subject_formset:
-                subject = subject_form.save(False)
-                subject.poll = poll
-                subject.save()
+                for subject_form in poll_subject_formset:
+                    subject = subject_form.save(False)
+                    subject.poll = poll
+                    subject.save()
+            else:
+                thread = thread_form.save(False)
+                thread.subject = subject
+                thread.user = request.user
+                thread.save()
+
+                post = post_form.save(False)
+                post.user = request.user
+                post.thread = thread
+                post.save()
+
+                for subject_form in poll_subject_formset:
+                    subject = subject_form.save(False)
+                    subject.save()
 
         messages.success(request, "You have created a new thread!")
 
@@ -137,5 +153,24 @@ def delete_post(request, post_id):
     post.delete()
 
     messages.success(request, "Your post was deleted!")
+
+    return redirect(reverse('thread', args={thread_id}))
+
+
+@login_required
+def thread_vote(request, thread_id, subject_id):
+    thread = Thread.objects.get(id=thread_id)
+
+    subject = thread.poll.votes.filter(user=request.user)
+
+    if subject:
+        messages.error(request, "You already voted on this... You're not trying to cheat are you?")
+        return redirect(reverse('thread', args={thread_id}))
+
+    subject = PollSubject.objects.get(id=subject_id)
+
+    subject.votes.create(poll=subject.poll, user=request.user)
+
+    messages.success(request, "We've registered your vote!")
 
     return redirect(reverse('thread', args={thread_id}))
