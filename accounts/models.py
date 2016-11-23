@@ -20,7 +20,7 @@ class AccountUserManager(UserManager):
                           is_active=True,
                           is_superuser=is_superuser,
                           date_joined=now,
-                          **extra_fields),
+                          **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
 
