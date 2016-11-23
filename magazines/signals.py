@@ -1,8 +1,8 @@
 import arrow
-from .models import Purchase
 
 
 def subscription_created(sender, **kwargs):
+    from .models import Purchase
     ipn_obj = sender
     magazine_id = ipn_obj.custom.split('-')[0]
     user_id = ipn_obj.custom.split('-')[1]
@@ -12,6 +12,7 @@ def subscription_created(sender, **kwargs):
 
 
 def subscription_was_cancelled(sender, **kwargs):
+    from .models import Purchase
     ipn_obj = sender
     magazine_id = ipn_obj.custom.split('-')[0]
     user_id = ipn_obj.custom.split('-')[1]

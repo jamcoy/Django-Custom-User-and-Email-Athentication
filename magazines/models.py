@@ -16,4 +16,4 @@ class Magazine(models.Model):
 class Purchase(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='purchases')
     magazine = models.ForeignKey(Magazine)
-    subscription_end = models.DateTimeField(blank=True, null=True)  # this is the warning
+    subscription_end = models.DateTimeField(blank=True, null=True)
