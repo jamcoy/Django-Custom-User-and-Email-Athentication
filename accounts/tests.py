@@ -1,10 +1,14 @@
-from unittest import TestCase
+from django.test import TestCase
+from .models import User
 
 
-class SimpleTest(TestCase):
-    def test_adding_something_simple(self):
-        self.assertEqual(1 + 2, 3)
+class CustomUserTest(TestCase):
+    def test_manager_create(self):
+        user = User.objects._create_user(None, "test@test.com",
+                                         "password",
+                                         False, False)
+        self.assertIsNotNone(user)
 
-    def test_adding_something_isnt_equal(self):
-        self.assertNotEqual(1 + 2, 4)
-        # self.assertNotEqual(1 + 2, 3)  # changed to make the assertNotEqual test fail
+        with self.assertRaises(ValueError):
+            user = User.objects._create_user(None, None, "password",
+                                             False, False)
