@@ -31,6 +31,8 @@ ALLOWED_HOSTS = [
 
 SITE_ID = 1
 
+INTERNAL_IPS = ('127.0.0.1',)
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -58,6 +60,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -65,8 +68,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+CONFIG_DEFAULTS = {
+        'INSERT_BEFORE': '<hr>',
+    },
 
 ROOT_URLCONF = 'auth_demo.urls'
 

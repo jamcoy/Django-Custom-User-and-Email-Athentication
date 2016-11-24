@@ -22,6 +22,7 @@ from paypal_store import views as paypal_views
 from products import views as product_views
 from magazines import views as magazine_views
 from threads import views as forum_views
+import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -57,3 +58,9 @@ urlpatterns = [
     url(r'^post/delete/(?P<thread_id>\d+)/(?P<post_id>\d+)/$', forum_views.delete_post, name='delete_post'),
     url(r'^thread/vote/(?P<thread_id>\d+)/(?P<subject_id>\d+)/$', forum_views.thread_vote, name='cast_vote'),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
