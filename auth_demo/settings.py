@@ -24,7 +24,10 @@ SECRET_KEY = '=+t!v=uhs&+uh$wk2r$=^+tnkm7%&&pq&k0c9j=b-j$-+qd!f+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '7641a572.ngrok.io',
+    '127.0.0.1'
+]
 
 SITE_ID = 1
 
@@ -38,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'paypal.standard.ipn',
-    'hello',
+    'home',
     'accounts',
     'paypal_store',
     'django_forms_bootstrap',
@@ -158,8 +161,8 @@ STRIPE_SECRET = os.getenv('STRIPE_SECRET', 'secret key')
 
 PAYPAL_TEST = True
 SITE_URL = 'http://127.0.0.1:8000'
-PAYPAL_NOTIFY_URL = 'https://***********/a-very-hard-to-guess-url/'
-PAYPAL_RECEIVER_EMAIL = 'seller@********'  # deprecated (but still works until 0.4?)
+PAYPAL_NOTIFY_URL = 'https://7641a572.ngrok.io/a-very-hard-to-guess-url/'
+PAYPAL_RECEIVER_EMAIL = 'seller@mtb.space'  # deprecated (but still works until 0.4?)
 
 
 # tinymce settings
