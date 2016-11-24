@@ -161,8 +161,8 @@ STRIPE_SECRET = os.getenv('STRIPE_SECRET', 'secret key')
 
 PAYPAL_TEST = True
 SITE_URL = 'http://127.0.0.1:8000'
-PAYPAL_NOTIFY_URL = 'https://7641a572.ngrok.io/a-very-hard-to-guess-url/'
-PAYPAL_RECEIVER_EMAIL = 'seller@mtb.space'  # deprecated (but still works until 0.4?)
+PAYPAL_NOTIFY_URL = 'https://********/a-very-hard-to-guess-url/'
+PAYPAL_RECEIVER_EMAIL = 'seller@*******'  # deprecated (but still works until 0.4?)
 
 
 # tinymce settings

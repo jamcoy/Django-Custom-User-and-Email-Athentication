@@ -2,3 +2,4 @@
 db.sqlite3
 .subscription_webhook.json.kate-swp
 ngrok
+fixtures/
